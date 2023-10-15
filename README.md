@@ -27,11 +27,12 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_location"></a> [cluster\_location](#input\_cluster\_location) | Region or zone location of cluster master | `string` | `"us-east1-a"` | no |
+| <a name="input_cluster_location"></a> [cluster\_location](#input\_cluster\_location) | Region or zone location of cluster master | `string` | `"us-east1-b"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Cluster name | `string` | n/a | yes |
+| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Cluster deletion protection | `bool` | `false` | no |
 | <a name="input_initial_node_count"></a> [initial\_node\_count](#input\_initial\_node\_count) | Initial node count | `number` | `1` | no |
-| <a name="input_machine_type"></a> [machine\_type](#input\_machine\_type) | Instance type for node pool | `string` | `"e2-medium"` | no |
-| <a name="input_nodepool_location"></a> [nodepool\_location](#input\_nodepool\_location) | Region of nodepool location | `string` | `"us-east1"` | no |
+| <a name="input_machine_type"></a> [machine\_type](#input\_machine\_type) | Instance type for node pool | `string` | `"e2-small"` | no |
+| <a name="input_nodepool_location"></a> [nodepool\_location](#input\_nodepool\_location) | Region of nodepool location | `string` | `"us-east1-b"` | no |
 | <a name="input_nodepool_name"></a> [nodepool\_name](#input\_nodepool\_name) | Nodepool name | `string` | n/a | yes |
 | <a name="input_preemptible"></a> [preemptible](#input\_preemptible) | Use preemptible instance types for nodepool | `bool` | `true` | no |
 | <a name="input_project"></a> [project](#input\_project) | Project ID | `string` | n/a | yes |
