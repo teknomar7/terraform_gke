@@ -1,8 +1,46 @@
 on: 
   pull_request:
+    branches:
+      - main
     paths-ignore:
       - ./README.md
 jobs:
+  tflint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      
+      - name: Cache plugin dir
+        uses: actions/cache@v2
+        with:
+          path: ~/.tflint.d/plugins
+          key: tflint-${{ hashfiles('.tflint.hcl') }}
+
+      - name: Install tflint
+        uses: terraform-linters/setup-tflint@v2
+
+      - name: tflint init
+        run: tflint --init
+
+      - name: tflint
+        run: tflint -f compact
+
+  tfsec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+    
+      - name: tfsec
+        id: sec
+        uses: aquasecurity/tfsec-action@v1.0.0
+        continue-on-error: true
+
   terraform:
     runs-on: ubuntu-latest
     steps:
@@ -11,8 +49,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup terraform
+      - name: Install terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.1
 
       - name: terraform fmt
         id: fmt
@@ -27,22 +67,7 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-  tfsec:
-    name: tfsec
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone repo
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-    
-      - name: tfsec
-        id: sec
-        uses: aquasecurity/tfsec-action@v1.0.0
-        continue-on-error: true
-
   terraform-docs:
-    name: terraform-docs
     runs-on: ubuntu-latest
     steps:
       - name: Clone repo
@@ -57,9 +82,3 @@ jobs:
           output-file: README.md
           output-method: inject
           git-push: "true"
-
-
-
-
-      
-  
