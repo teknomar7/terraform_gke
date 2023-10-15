@@ -17,7 +17,7 @@ variable "cluster_name" {
 variable "cluster_location" {
   type        = string
   description = "Region or zone location of cluster master"
-  default     = "us-east1-a"
+  default     = "us-east1-b"
 }
 
 variable "initial_node_count" {
@@ -40,7 +40,7 @@ variable "nodepool_name" {
 variable "nodepool_location" {
   type        = string
   description = "Region of nodepool location"
-  default = "us-east1"
+  default     = "us-east1-b"
 }
 
 variable "preemptible" {
@@ -52,5 +52,11 @@ variable "preemptible" {
 variable "machine_type" {
   type        = string
   description = "Instance type for node pool"
-  default = "e2-medium"
+  default     = "e2-small"
+}
+
+variable "deletion_protection" {
+  type        = bool
+  description = "Cluster deletion protection"
+  default     = false
 }

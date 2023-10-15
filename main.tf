@@ -12,6 +12,7 @@ resource "google_container_cluster" "primary" {
   # node pool and immediately delete it.
   remove_default_node_pool = var.remove_default_node_pool
   initial_node_count       = var.initial_node_count
+  deletion_protection      = var.deletion_protection
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
@@ -24,8 +25,16 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     preemptible  = var.preemptible
     machine_type = var.machine_type
 
+    metadata = {
+      disable-legacy-endpoints = true
+    }
+
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     # service_account = google_service_account.default.email
+    # oauth_scopes = [
+    #   "https://www.googleapis.com/auth/cloud-platform"
+    # ]
+    # service_account = "565180952076-compute@developer.gserviceaccount.com"
     # oauth_scopes = [
     #   "https://www.googleapis.com/auth/cloud-platform"
     # ]
