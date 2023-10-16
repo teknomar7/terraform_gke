@@ -1,4 +1,4 @@
-variable "project" {
+variable "project_id" {
   type        = string
   description = "Project ID"
 }
@@ -59,4 +59,18 @@ variable "deletion_protection" {
   type        = bool
   description = "Cluster deletion protection"
   default     = false
+}
+
+variable "iam_roles" {
+  type        = list(string)
+  description = "List of IAM roles to assign to service account"
+  default = [
+    "roles/container.nodeServiceAccount"
+  ]
+}
+
+variable "workload_metadata_enabled" {
+  type        = bool
+  description = "Enables workload metadata at the node level"
+  default     = true
 }

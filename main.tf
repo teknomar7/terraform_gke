@@ -1,5 +1,5 @@
 provider "google" {
-  project = var.project
+  project = var.project_id
   region  = var.region
 }
 
@@ -13,9 +13,13 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = var.remove_default_node_pool
   initial_node_count       = var.initial_node_count
   deletion_protection      = var.deletion_protection
+
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
 }
 
-resource "google_container_node_pool" "primary_preemptible_nodes" {
+resource "google_container_node_pool" "primary_nodes" {
   name       = var.nodepool_name
   location   = var.nodepool_location
   cluster    = google_container_cluster.primary.name
@@ -29,14 +33,10 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
       disable-legacy-endpoints = true
     }
 
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    # service_account = google_service_account.default.email
-    # oauth_scopes = [
-    #   "https://www.googleapis.com/auth/cloud-platform"
-    # ]
-    # service_account = "565180952076-compute@developer.gserviceaccount.com"
-    # oauth_scopes = [
-    #   "https://www.googleapis.com/auth/cloud-platform"
-    # ]
+    workload_metadata_config {
+      mode = var.workload_metadata_enabled ? "GKE_METADATA" : "GCE_METADATA"
+    }
+
+    service_account = google_service_account.gke_sa.email
   }
 }
