@@ -32,6 +32,12 @@ variable "remove_default_node_pool" {
   default     = true
 }
 
+variable "network_policy_enabled" {
+  type        = bool
+  description = "Enables network policy"
+  default     = true
+}
+
 variable "nodepool_name" {
   type        = string
   description = "Nodepool name"
@@ -43,9 +49,15 @@ variable "nodepool_location" {
   default     = "us-east1-b"
 }
 
+variable "node_count" {
+  type        = number
+  description = "Number of nodes in the cluster"
+  default     = 1
+}
+
 variable "preemptible" {
   type        = bool
-  description = "Use preemptible instance types for nodepool"
+  description = "Enables preemptible instance types for nodepool"
   default     = true
 }
 
@@ -72,5 +84,23 @@ variable "iam_roles" {
 variable "workload_metadata_enabled" {
   type        = bool
   description = "Enables workload metadata at the node level"
+  default     = true
+}
+
+variable "auto_upgrade" {
+  type        = bool
+  description = "Enables auto upgrade of Kubernetes on nodes"
+  default     = true
+}
+
+variable "auto_repair" {
+  type        = bool
+  description = "Enable auto repair of nodes failing health checks"
+  default     = true
+}
+
+variable "kubeconfig_download" {
+  type        = bool
+  description = "Autodownload kubeconfig (overwrites existing file in ~/.kube/config)"
   default     = true
 }
