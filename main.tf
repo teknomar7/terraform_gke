@@ -3,7 +3,9 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_container_cluster" "primary" {
+# Ignoring tfsec rule below because pod-security-policy has been deprecated
+# https://cloud.google.com/kubernetes-engine/docs/deprecations/podsecuritypolicy
+resource "google_container_cluster" "primary" { #tfsec:ignore:google-gke-enforce-pod-security-policy
   name     = var.cluster_name
   location = var.cluster_location
 
