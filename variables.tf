@@ -73,11 +73,31 @@ variable "deletion_protection" {
   default     = false
 }
 
+# This probably overpermissioning and needs work
 variable "iam_roles" {
   type        = list(string)
   description = "List of IAM roles to assign to service account"
   default = [
-    "roles/container.nodeServiceAccount"
+    "roles/container.nodeServiceAccount",
+    "roles/clouddebugger.agent",
+    "roles/cloudprofiler.agent",
+    "roles/cloudtrace.agent",
+    "roles/monitoring.metricWriter",
+  ]
+}
+
+# This probably overpermissioning and needs work
+variable "oauth_scopes" {
+  description = "OAuth scopes of the node. Full list can be found at https://developers.google.com/identity/protocols/oauth2/scopes"
+  type        = list(string)
+  default = [
+    "https://www.googleapis.com/auth/devstorage.read_only",
+    "https://www.googleapis.com/auth/logging.write",
+    "https://www.googleapis.com/auth/monitoring",
+    "https://www.googleapis.com/auth/servicecontrol",
+    "https://www.googleapis.com/auth/service.management.readonly",
+    "https://www.googleapis.com/auth/trace.append",
+    "https://www.googleapis.com/auth/cloud-platform", # Had to add this to fix monitoring pods crashing
   ]
 }
 

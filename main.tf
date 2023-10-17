@@ -46,11 +46,15 @@ resource "google_container_node_pool" "primary_nodes" {
     }
 
     service_account = google_service_account.gke_sa.email
+    oauth_scopes    = var.oauth_scopes
   }
 }
 
 resource "null_resource" "kubeconfig" {
   count = var.kubeconfig_download ? 1 : 0
+  depends_on = [
+    google_container_cluster.primary, google_container_node_pool.primary_nodes
+  ]
   provisioner "local-exec" {
     command = "gcloud components install gke-gcloud-auth-plugin"
   }

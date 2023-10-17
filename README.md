@@ -37,7 +37,7 @@ No modules.
 | <a name="input_cluster_location"></a> [cluster\_location](#input\_cluster\_location) | Region or zone location of cluster master | `string` | `"us-east1-b"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Cluster name | `string` | n/a | yes |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Cluster deletion protection | `bool` | `false` | no |
-| <a name="input_iam_roles"></a> [iam\_roles](#input\_iam\_roles) | List of IAM roles to assign to service account | `list(string)` | <pre>[<br>  "roles/container.nodeServiceAccount"<br>]</pre> | no |
+| <a name="input_iam_roles"></a> [iam\_roles](#input\_iam\_roles) | List of IAM roles to assign to service account | `list(string)` | <pre>[<br>  "roles/container.nodeServiceAccount",<br>  "roles/clouddebugger.agent",<br>  "roles/cloudprofiler.agent",<br>  "roles/cloudtrace.agent",<br>  "roles/monitoring.metricWriter"<br>]</pre> | no |
 | <a name="input_initial_node_count"></a> [initial\_node\_count](#input\_initial\_node\_count) | Initial node count | `number` | `1` | no |
 | <a name="input_kubeconfig_download"></a> [kubeconfig\_download](#input\_kubeconfig\_download) | Autodownload kubeconfig (overwrites existing file in ~/.kube/config) | `bool` | `true` | no |
 | <a name="input_machine_type"></a> [machine\_type](#input\_machine\_type) | Instance type for node pool | `string` | `"e2-small"` | no |
@@ -45,6 +45,7 @@ No modules.
 | <a name="input_node_count"></a> [node\_count](#input\_node\_count) | Number of nodes in the cluster | `number` | `1` | no |
 | <a name="input_nodepool_location"></a> [nodepool\_location](#input\_nodepool\_location) | Region of nodepool location | `string` | `"us-east1-b"` | no |
 | <a name="input_nodepool_name"></a> [nodepool\_name](#input\_nodepool\_name) | Nodepool name | `string` | n/a | yes |
+| <a name="input_oauth_scopes"></a> [oauth\_scopes](#input\_oauth\_scopes) | OAuth scopes of the node. Full list can be found at https://developers.google.com/identity/protocols/oauth2/scopes | `list(string)` | <pre>[<br>  "https://www.googleapis.com/auth/devstorage.read_only",<br>  "https://www.googleapis.com/auth/logging.write",<br>  "https://www.googleapis.com/auth/monitoring",<br>  "https://www.googleapis.com/auth/servicecontrol",<br>  "https://www.googleapis.com/auth/service.management.readonly",<br>  "https://www.googleapis.com/auth/trace.append",<br>  "https://www.googleapis.com/auth/cloud-platform"<br>]</pre> | no |
 | <a name="input_preemptible"></a> [preemptible](#input\_preemptible) | Enables preemptible instance types for nodepool | `bool` | `true` | no |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | Project ID | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Default region | `string` | `"us-east1"` | no |
