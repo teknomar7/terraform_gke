@@ -38,6 +38,12 @@ variable "network_policy_enabled" {
   default     = true
 }
 
+variable "allowed_cidr_block" {
+  type        = string
+  description = "External CIDR block that can access Kubernetes master"
+  default     = "0.0.0.0/0"
+}
+
 variable "nodepool_name" {
   type        = string
   description = "Nodepool name"

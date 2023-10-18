@@ -6,7 +6,7 @@ provider "google" {
 # Enable Kubernetes Engine in Google Cloud
 resource "null_resource" "enable_kubernetes_engine" {
   provisioner "local-exec" {
-    command = "gcloud services enable --async container.googleapis.com"
+    command = "gcloud services enable --async container.googleapis.com --project ${var.project_id}"
   }
 }
 
@@ -30,6 +30,14 @@ resource "google_container_cluster" "primary" { #tfsec:ignore:google-gke-enforce
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
+
+  master_authorized_networks_config {
+    cidr_blocks {
+      cidr_block   = var.allowed_cidr_block
+      display_name = "allowed-cidr"
+    }
+  }
+
 }
 
 resource "google_container_node_pool" "primary_nodes" {

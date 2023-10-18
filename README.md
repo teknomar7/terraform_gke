@@ -1,8 +1,8 @@
 # terraform_gke
 
-Note:  This is currently a personal project that is a WIP.  This is in no way production ready.
-
 Terraform repo designed to build a GKE cluster.
+
+Note:  This is currently a personal project that is a WIP.  This is in no way production ready.
 
 ## Prerequisites
 
@@ -82,6 +82,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allowed_cidr_block"></a> [allowed\_cidr\_block](#input\_allowed\_cidr\_block) | External CIDR block that can access Kubernetes master | `string` | `"0.0.0.0/0"` | no |
 | <a name="input_auto_repair"></a> [auto\_repair](#input\_auto\_repair) | Enable auto repair of nodes failing health checks | `bool` | `true` | no |
 | <a name="input_auto_upgrade"></a> [auto\_upgrade](#input\_auto\_upgrade) | Enables auto upgrade of Kubernetes on nodes | `bool` | `true` | no |
 | <a name="input_cluster_location"></a> [cluster\_location](#input\_cluster\_location) | Region or zone location of cluster master | `string` | `"us-east1-b"` | no |
