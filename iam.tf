@@ -1,3 +1,5 @@
+# Create IAM service account and attach roles
+
 resource "google_service_account" "gke_sa" {
   account_id   = "${var.cluster_name}-gke-sa"
   display_name = "Custom GKE service account"

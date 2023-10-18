@@ -3,6 +3,13 @@ provider "google" {
   region  = var.region
 }
 
+# Enable Kubernetes Engine in Google Cloud
+resource "null_resource" "enable_kubernetes_engine" {
+  provisioner "local-exec" {
+    command = "gcloud services enable --async container.googleapis.com"
+  }
+}
+
 # Ignoring tfsec rule below because pod-security-policy has been deprecated
 # https://cloud.google.com/kubernetes-engine/docs/deprecations/podsecuritypolicy
 resource "google_container_cluster" "primary" { #tfsec:ignore:google-gke-enforce-pod-security-policy
@@ -52,6 +59,7 @@ resource "google_container_node_pool" "primary_nodes" {
   }
 }
 
+# Enable auth plugin and download kubeconfig; overwrites file located at ~/.kube/config
 resource "null_resource" "kubeconfig" {
   count = var.kubeconfig_download ? 1 : 0
   depends_on = [
@@ -61,6 +69,6 @@ resource "null_resource" "kubeconfig" {
     command = "gcloud components install gke-gcloud-auth-plugin"
   }
   provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials test-cluster --zone ${var.cluster_location} --project ${var.project_id}"
+    command = "gcloud container clusters get-credentials ${var.cluster_name} --zone ${var.cluster_location} --project ${var.project_id}"
   }
 }

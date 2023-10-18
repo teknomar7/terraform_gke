@@ -1,3 +1,52 @@
+# terraform_gke
+
+Note:  This is currently a personal project that is a WIP.  This is in no way production ready.
+
+Terraform repo designed to build a GKE cluster.
+
+## Prerequisites
+
+The following are prerequisites to run this code.  This has been tested on MacOS with the packages below being installed with [Homebrew](https://brew.sh/). The packages listed below are named to match the brew package name.
+
+- google-cloud-sdk (This is installed as a cask; `brew install --cask google-cloud-sdk`)
+- terraform
+- kubernetes-cli
+
+Additionally, you will need to create an account and project on Google Cloud, along with a billing account and associate the two.
+
+## Authentication
+
+Begin by initializing the sdk (required only once after installing the sdk):  `gcloud init`
+
+NOTE:  I'm not sure if both of the auth commands below are required, will refine docs after futher testing.
+
+Run the following two authentication commands.  These will redirect you to a webpage to authenticate with your Google account.
+
+`gcloud auth application-default login`
+`gcloud auth login`
+
+## Usage
+
+To begin, clone a local copy of this repository to you machine:  `git clone https://github.com/teknomar7/terraform_gke.git`
+
+### Input vars
+
+Before running this code, you will need to create a `terraform.tfvars` file in the root directory of the project.  Define required variables and those which you would like to override as defined in the `variables.tf`
+
+If you do not provide the aforementioned file, running the code will prompt you at the cli for any required variables which are not defined.
+
+### Execution
+
+After completing the aformentioned prerequisites, use the following commands to execute terraform:
+
+`terraform init` - This will initialize the codebase and download the required provider files.
+
+`terraform plan` - This is not required, but is a dry-run of what will be built and will provide some validation of you local setup and connectivity.  
+
+`terraform apply` - This will execute this code and build the GKE cluster in Google Cloud.
+
+`terraform destroy` - This will destroy all resources build with this code.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -26,6 +75,7 @@ No modules.
 | [google_container_node_pool.primary_nodes](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/container_node_pool) | resource |
 | [google_project_iam_member.project](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/project_iam_member) | resource |
 | [google_service_account.gke_sa](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/service_account) | resource |
+| [null_resource.enable_kubernetes_engine](https://registry.terraform.io/providers/hashicorp/null/3.2.1/docs/resources/resource) | resource |
 | [null_resource.kubeconfig](https://registry.terraform.io/providers/hashicorp/null/3.2.1/docs/resources/resource) | resource |
 
 ## Inputs
