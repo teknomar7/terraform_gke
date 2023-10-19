@@ -71,6 +71,7 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [google_compute_network.vpc_network](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/compute_network) | resource |
 | [google_container_cluster.primary](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/container_cluster) | resource |
 | [google_container_node_pool.primary_nodes](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/container_node_pool) | resource |
 | [google_project_iam_member.project](https://registry.terraform.io/providers/hashicorp/google/5.1.0/docs/resources/project_iam_member) | resource |
@@ -83,6 +84,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_cidr_block"></a> [allowed\_cidr\_block](#input\_allowed\_cidr\_block) | External CIDR block that can access Kubernetes master | `string` | `"0.0.0.0/0"` | no |
+| <a name="input_auto_create_subnetworks"></a> [auto\_create\_subnetworks](#input\_auto\_create\_subnetworks) | Auto create vpc subnetworks | `bool` | `true` | no |
 | <a name="input_auto_repair"></a> [auto\_repair](#input\_auto\_repair) | Enable auto repair of nodes failing health checks | `bool` | `true` | no |
 | <a name="input_auto_upgrade"></a> [auto\_upgrade](#input\_auto\_upgrade) | Enables auto upgrade of Kubernetes on nodes | `bool` | `true` | no |
 | <a name="input_cluster_location"></a> [cluster\_location](#input\_cluster\_location) | Region or zone location of cluster master | `string` | `"us-east1-b"` | no |

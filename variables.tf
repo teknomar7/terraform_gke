@@ -130,3 +130,9 @@ variable "kubeconfig_download" {
   description = "Autodownload kubeconfig (overwrites existing file in ~/.kube/config)"
   default     = true
 }
+
+variable "auto_create_subnetworks" {
+  type        = bool
+  description = "Auto create vpc subnetworks"
+  default     = true
+}

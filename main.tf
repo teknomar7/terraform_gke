@@ -23,6 +23,8 @@ resource "google_container_cluster" "primary" { #tfsec:ignore:google-gke-enforce
   initial_node_count       = var.initial_node_count
   deletion_protection      = var.deletion_protection
 
+  network = google_compute_network.vpc_network.id
+
   network_policy {
     enabled = var.network_policy_enabled
   }
