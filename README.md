@@ -39,13 +39,15 @@ If you do not provide the aforementioned file, running the code will prompt you 
 
 After completing the aformentioned prerequisites, use the following commands to execute terraform:
 
-`terraform init` - This will initialize the codebase and download the required provider files.
+`terraform init` - Initializes the codebase and download the required provider files.
 
-`terraform plan` - This is not required, but is a dry-run of what will be built and will provide some validation of you local setup and connectivity.  
+`terraform plan` - Dry-run of what will be built and will provide some validation of you local setup and connectivity.  
 
-`terraform apply` - This will execute this code and build the GKE cluster in Google Cloud.
+`terraform apply` - Execute this code and build the GKE cluster in Google Cloud.
 
-`terraform destroy` - This will destroy all resources build with this code.
+`terraform destroy` - Destroy all resources build with this code.
+
+`terraform output` - Output values defined in the `output.tf` file after an environment has been built.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
