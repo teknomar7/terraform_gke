@@ -49,6 +49,10 @@ After completing the aformentioned prerequisites, use the following commands to 
 
 `terraform output` - Output values defined in the `output.tf` file after an environment has been built.
 
+After the build is complete, this code will automatically download the kubeconfig file to `~/.kube/config`.  Check that the pods are all running with:
+
+`kubectl get pods -A`
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
